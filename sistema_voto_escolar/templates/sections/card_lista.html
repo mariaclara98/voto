@@ -1,0 +1,64 @@
+{%for lista in listas%}
+  <div class="col-6">
+    <div class="card mb-3  bg-light">
+      <div class="card m-5 voto " style="max-width: 540px;" onclick="voto('{{lista}}', '{{estudiante.id}}', '{{lista.id}}', )">
+        <div class="row g-0">
+          <div class="col-md-4">
+            {% if lista.foto %}
+            <img src="{{ lista.foto.url }}" class="img-thumbnail" width="200" height="100" alt="Imagen de {{ lista.nombre }}">
+            {% else %}
+            <img src="" class="img-fluid rounded-start" alt="No hay imagen para esta lista">
+            {% endif %}
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Lista </b>{{lista.numero}}</b></h5><hr>
+              <p class="card-text">Nombre de la Lista:</p>
+              <p class="card-text"><b>{{lista.nombre}}</b></p>
+              <p class="card-text">Presidente:</p>
+              <p class="card-text"><b>{{lista.candidatos.first.estudiante}}</b></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="container ms-5 mb-2">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detalleLista{{ lista.id }}">
+            Detalles Lista <b>{{lista.nombre}}</b>
+          </button>
+        </div>
+      </div>
+    </div>
+      <!-- Modal -->
+    <div class="modal fade" id="detalleLista{{ lista.id }}" data-bs-backdrop="static" data-bs-keyboard="false"tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Lista: {{lista.numero}}</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h6>Propuestas:</h6>
+            <p>{{ lista.propuesta }}</p>
+            <h6>Candidatos:</h6>
+            <ul>
+              {% for candidato in lista.candidatos.all %}
+              <li>
+                {% if candidato.foto %}
+                  <img src="{{ candidato.foto.url }}" class="img-fluid rounded-start" width="100" height="100" alt="Imagen de {{ lista.nombre }}">
+                {% else %}
+                  <img src="" class="img-fluid rounded-start" alt="No hay imagen para este candidato">
+                {% endif %}
+                <strong>{{ candidato.estudiante }}</strong><br>{{ candidato.dignidad }}
+              </li>
+              {% endfor %}
+            </ul>        
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%endfor%}

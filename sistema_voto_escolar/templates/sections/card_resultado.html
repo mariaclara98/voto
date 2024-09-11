@@ -1,0 +1,46 @@
+{% for lista in listas %}
+{% if lista.nombre == 'Blanco' or lista.nombre == 'Nulo' %}
+<div class="col-6">
+  <div class="card m-5" style="max-width: 540px;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          {% if lista.foto %}
+          <img src="{{ lista.foto.url }}" class="img-fluid rounded-start" width="200" height="auto" alt="Imagen de {{ lista.nombre }}">
+          {% else %}
+          <img src="" class="img-fluid rounded-start" alt="No hay imagen para esta lista">
+          {% endif %}
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h1 class="card-title">Votos {{lista.nombre}}s</h1>
+            <p class="card-text"><b>Total de votos</b></p>
+            <h1 class="card-text">{{lista.num_votos}}</h1>            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% else %}
+<div class="col-6">
+    <div class="card m-5" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            {% if lista.foto %}
+            <img src="{{ lista.foto.url }}" class="img-fluid rounded-start" width="200" height="auto" alt="Imagen de {{ lista.nombre }}">
+            {% else %}
+            <img src="" class="img-fluid rounded-start" alt="No hay imagen para esta lista">
+            {% endif %}
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h1 class="card-title">Lista: <b>{{lista.nombre}}</b></h1>
+              <p class="card-text"><b>Total de votos</b></p>
+              <h1 class="card-text"><b>{{lista.num_votos}}</b></h1>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {% endfor %}

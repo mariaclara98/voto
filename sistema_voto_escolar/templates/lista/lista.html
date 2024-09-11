@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+
+{%block styles%}
+    <style>
+        .voto:hover{
+            background-color: rgb(193, 241, 252);
+            cursor: pointer;
+        }
+    </style>
+{%endblock%}
+
+{%block title%}Listas{%endblock%}
+
+{%block content%}
+    <div class="alert alert-info text-center" role="alert">
+        <b>Bienvenido Estudiante {{user.first_name}} {{user.last_name}}</b>, proceda a realizar su voto.
+    </div>
+    {%include 'sections/card_lista.html'%}    
+{%endblock%}
+
+{% block scriptVoto %}
+ 
+<script>
+    function voto(lista, estudianteId, listaId){
+        let darVoto = confirm('Está seguro de dar su voto por la lista '+ lista)
+        if (darVoto){
+            location.href = `/listas/?id_est=${estudianteId}&id_list=${listaId}`
+        }
+    }
+</script>
+
+{% endblock %}
